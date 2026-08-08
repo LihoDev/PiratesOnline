@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Liho.DDD.Presentation.FPS
+namespace PiratesOnline.Presentation.FPS
 {
     public class FPSLocker : IInitializable
     {
