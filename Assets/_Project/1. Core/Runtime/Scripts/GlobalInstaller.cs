@@ -10,6 +10,7 @@ namespace PiratesOnline.Infrastructure.Core
         public override void InstallBindings()
         {
             Container.Bind<IServerDataService>().To<MockServerDataService>().AsSingle();
+            Container.Bind<IAssetProvider>().To<AddressableAssetProvider>().AsSingle();
             Container.BindInterfacesTo<FPSLocker>().AsSingle();
         }
     }
