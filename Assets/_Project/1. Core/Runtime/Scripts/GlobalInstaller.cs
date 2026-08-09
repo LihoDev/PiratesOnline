@@ -1,6 +1,5 @@
 using PiratesOnline.Domain.Service;
 using PiratesOnline.Presentation.FPS;
-using UnityEngine;
 using Zenject;
 
 namespace PiratesOnline.Infrastructure.Core
@@ -11,6 +10,7 @@ namespace PiratesOnline.Infrastructure.Core
         {
             Container.Bind<IServerDataService>().To<MockServerDataService>().AsSingle();
             Container.Bind<IAssetProvider>().To<AddressableAssetProvider>().AsSingle();
+            Container.Bind<IMapService>().To<MapService>().AsSingle();
             Container.BindInterfacesTo<FPSLocker>().AsSingle();
         }
     }
