@@ -14,6 +14,11 @@ namespace PiratesOnline.Presentation.Player
             _cameras = cameras;
         }
 
+        //private void Awake()
+        //{
+        //    ProjectContext.Instance.Container.Inject(this);
+        //}
+
         public override void OnStartLocalPlayer()
         {
             if (_cameras != null)

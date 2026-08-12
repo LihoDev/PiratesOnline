@@ -23,8 +23,8 @@ namespace PiratesOnline.Domain.Service
 
     public class MapService : IMapService
     {
-        public int Width { get; } = 50;
-        public int Height { get; } = 50;
+        public int Width { get; } = 5;
+        public int Height { get; } = 5;
         public float CellSize { get; } = 10f;
 
         private MapCell[,] _grid;

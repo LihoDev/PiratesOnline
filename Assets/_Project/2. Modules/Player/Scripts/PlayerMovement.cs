@@ -25,7 +25,7 @@ namespace PiratesOnline.Presentation.Player
 
         private void Awake()
         {
-            ProjectContext.Instance.Container.Inject(this);
+           // ProjectContext.Instance.Container.Inject(this);
             _shipController = GetComponent<PlayerShipController>();
             _mainCam = Camera.main;
         }

@@ -36,6 +36,7 @@ namespace PiratesOnline.Infrastructure.Network
             shipController.InitServerData(playerData.Stats);
 
             NetworkServer.AddPlayerForConnection(conn, playerInstance);
+            Debug.Log("added player");
         }
 
         public override void OnServerDisconnect(NetworkConnectionToClient conn)
