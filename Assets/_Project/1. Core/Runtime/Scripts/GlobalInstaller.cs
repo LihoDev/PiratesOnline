@@ -1,4 +1,5 @@
 using PiratesOnline.Domain.Service;
+using PiratesOnline.Infrastructure.Input;
 using PiratesOnline.Presentation.FPS;
 using Zenject;
 
@@ -12,6 +13,7 @@ namespace PiratesOnline.Infrastructure.Core
             Container.Bind<IAssetProvider>().To<AddressableAssetProvider>().AsSingle();
             Container.Bind<IMapService>().To<MapService>().AsSingle();
             Container.BindInterfacesTo<FPSLocker>().AsSingle();
+            Container.BindInterfacesTo<InputManager>().AsSingle();
         }
     }
 }

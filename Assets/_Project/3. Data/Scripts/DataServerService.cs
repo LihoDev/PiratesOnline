@@ -50,10 +50,10 @@ namespace PiratesOnline.Domain.Service
                     MastsCount = 1,
                     DecksCount = 1,
                     SkinAddress = "Skin_DefaultSloop",
-                    ShipColor = Color.white
+                    ShipColor = Random.ColorHSV()
                 },
                 Inventory = new ItemData[0],
-                LastPosition = Vector2.zero //!!!
+                LastPosition = Vector2.zero
             };
         }
     }

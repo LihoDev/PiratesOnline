@@ -1,5 +1,6 @@
 using Mirror;
 using PiratesOnline.Domain.Service;
+using PiratesOnline.Presentation.Player;
 using UnityEngine;
 using Zenject;
 
@@ -8,25 +9,33 @@ namespace PiratesOnline.Infrastructure.Network
     public class PiratesNetworkManager : NetworkManager
     {
         private IServerDataService _dataService;
+        private IMapService _mapService;
+        private IInstantiator _instantiator;
 
         [Inject]
-        public void Construct(IServerDataService dataService)
+        public void Construct(IServerDataService dataService, IMapService mapService, IInstantiator instantiator)
         {
             _dataService = dataService;
+            _mapService = mapService;
+            _instantiator = instantiator;
         }
 
         public override void OnServerAddPlayer(NetworkConnectionToClient conn)
         {
             string accountId = $"Player_{conn.connectionId}";
             var playerData = _dataService.GetPlayerData(accountId);
-            GameObject playerInstance = Instantiate(playerPrefab);
+            GameObject playerInstance = _instantiator.InstantiatePrefab(playerPrefab);
 
-            // var controller = playerInstance.GetComponent<PlayerNetworkController>();
-            // controller.InitData(playerData);
+            if (playerData.LastPosition == Vector2.zero)
+            {
+                playerData.LastPosition = _mapService.GetRandomEdgeSpawnPosition();
+            }
+            playerInstance.transform.position = playerData.LastPosition;
+
+            var shipController = playerInstance.GetComponent<PlayerShipController>();
+            shipController.InitServerData(playerData.Stats);
 
             NetworkServer.AddPlayerForConnection(conn, playerInstance);
-
-            playerInstance.transform.position = playerData.LastPosition; //!!! For old players only, no random 
         }
 
         public override void OnServerDisconnect(NetworkConnectionToClient conn)

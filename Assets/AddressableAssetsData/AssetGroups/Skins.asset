@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Skins
   m_GUID: f6602bfd419894c44a7a01c147ec2ce9
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: fe618740cfeb82c4aaa37e62c2bdf275
+    m_Address: Skin_DefaultSloop
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 682cc3fafd396bf43bd3d0df1ca6e61c, type: 2}
   m_SchemaSet:
