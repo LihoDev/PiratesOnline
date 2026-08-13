@@ -22,10 +22,16 @@ namespace PiratesOnline.Infrastructure.Network
 
         public override void OnServerAddPlayer(NetworkConnectionToClient conn)
         {
+            GameObject playerInstance = InitPlayer(conn);
+            NetworkServer.AddPlayerForConnection(conn, playerInstance);
+            Debug.Log("added player on server");
+        }
+
+        private GameObject InitPlayer(NetworkConnectionToClient conn)
+        {
             string accountId = $"Player_{conn.connectionId}";
             var playerData = _dataService.GetPlayerData(accountId);
-            GameObject playerInstance = _instantiator.InstantiatePrefab(playerPrefab);
-
+            GameObject playerInstance = Object.Instantiate(playerPrefab);
             if (playerData.LastPosition == Vector2.zero)
             {
                 playerData.LastPosition = _mapService.GetRandomEdgeSpawnPosition();
@@ -34,9 +40,7 @@ namespace PiratesOnline.Infrastructure.Network
 
             var shipController = playerInstance.GetComponent<PlayerShipController>();
             shipController.InitServerData(playerData.Stats);
-
-            NetworkServer.AddPlayerForConnection(conn, playerInstance);
-            Debug.Log("added player");
+            return playerInstance;
         }
 
         public override void OnServerDisconnect(NetworkConnectionToClient conn)
