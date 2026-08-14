@@ -22,6 +22,6 @@ namespace PiratesOnline.Domain.Data
     {
         public BiomeType Type;
         public float SpeedMultiplier;
-        public Color DebugColor; //!!! Temp
+        public Color DebugColor;
     }
 }

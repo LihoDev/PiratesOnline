@@ -25,13 +25,14 @@ namespace PiratesOnline.Presentation.Player
 
         private void Awake()
         {
-           // ProjectContext.Instance.Container.Inject(this);
             _shipController = GetComponent<PlayerShipController>();
             _mainCam = Camera.main;
         }
 
         public override void OnStartLocalPlayer()
         {
+            InputManager.Instance.Actions.Enable();
+            InputManager.Instance.ChangeInputMap(InputManager.InputType.Player);
             InputManager.Instance.Actions.Player.Attack.performed += HandleInput;
         }
 
@@ -53,6 +54,7 @@ namespace PiratesOnline.Presentation.Player
         private void HandleInput(InputAction.CallbackContext context)
         {
             Vector2 mousePos = _mainCam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            Debug.Log($"Clicked to {mousePos}");
             CmdMoveTo(mousePos);
         }
 

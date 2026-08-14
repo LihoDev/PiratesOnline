@@ -43,18 +43,18 @@ namespace PiratesOnline.Presentation.Player
                 _shipVisuals = null;
             }
 
-            // Загружаем новый скин через Addressables, если он еще не загружен
+            // Upload a new skin via Addressables, if it hasn`t akready been uploaded
             if (_shipVisuals == null && !string.IsNullOrEmpty(newStats.SkinAddress))
             {
                 _shipVisuals = await _assetProvider.InstantiateAsync(
                     newStats.SkinAddress,
                     transform.position,
                     transform.rotation,
-                    transform // Делаем визуал дочерним объектом
+                    transform // Make skin a child object
                 );
             }
 
-            // Применяем цвет
+            // Apply color
             if (_shipVisuals != null)
             {
                 var spriteRenderer = _shipVisuals.GetComponentInChildren<SpriteRenderer>();

@@ -9,8 +9,6 @@ namespace PiratesOnline.Infrastructure.Network
     {
         private IMapService _mapService;
 
-        // SyncVar автоматически передается всем клиентам при изменении на сервере.
-        // Когда клиент получает новое значение, вызывается hook OnSeedChanged.
         [SyncVar(hook = nameof(OnSeedChanged))]
         private int _mapSeed;
 
@@ -22,16 +20,16 @@ namespace PiratesOnline.Infrastructure.Network
 
         public override void OnStartServer()
         {
-            // Сервер (Хост) придумывает зерно генерации
+            // The server (Host) comes up with the generation seed
             _mapSeed = Random.Range(1000, 99999);
 
-            // Сервер сам тоже генерирует карту
+            // The server generates a map
             _mapService.GenerateMap(_mapSeed);
         }
 
         private void OnSeedChanged(int oldSeed, int newSeed)
         {
-            // Клиенты получают зерно от сервера и генерируют такую же карту
+            // Client receive grain from server and generate the same map
             if (isClientOnly)
             {
                 _mapService.GenerateMap(newSeed);

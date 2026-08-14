@@ -10,14 +10,12 @@ namespace PiratesOnline.Infrastructure.Network
     {
         private IServerDataService _dataService;
         private IMapService _mapService;
-        private IInstantiator _instantiator;
 
         [Inject]
-        public void Construct(IServerDataService dataService, IMapService mapService, IInstantiator instantiator)
+        public void Construct(IServerDataService dataService, IMapService mapService)
         {
             _dataService = dataService;
             _mapService = mapService;
-            _instantiator = instantiator;
         }
 
         public override void OnServerAddPlayer(NetworkConnectionToClient conn)
